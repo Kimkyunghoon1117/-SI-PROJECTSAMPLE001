@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+<setting value="NULL" name="jdbcTypeForNull"/>
+<!-- myBatis Inteceptor for get column information -->
+<!-- Camel Case로 자동 치환 -->
+<setting name="mapUnderscoreToCamelCase" value="true"/>
+</settings>
+
+<!-- typeAliases -->
+<typeAliases>
+	<!-- <typeAlias type="com.seed.study.vo.SampleVO" alias="SampleVO"/>
+	<typeAlias type="com.seed.study.vo.SearchConditionVO" alias="SearchConditionVO"/> -->
+<!-- 	<typeAlias type="com.seed.study.vo.InsertUser" alias="Iu"/> -->
+</typeAliases>
+<!-- 데이터를 조회할 때 값이 없으면 컬럼도 null로 넘어오지만 해당 plugin을 작성하면 값이 없어도 컬럼값을 가져 올 수 있다 -->
+
+<plugins>
+<plugin interceptor="com.nexacro.uiadapter.spring.dao.mybatis.NexacroMybatisMetaDataProvider" />
+<plugin interceptor="com.nexacro.uiadapter.spring.dao.mybatis.NexacroMybatisResultSetHandler" />
+</plugins>
+
+<!-- DB정보를 썼던 부분 environments 엘리먼트로 dataSource 등등의 정보를 썼는데 스프링에서는 
+그 정보를 이 파일에서 안쓴다! 기존에 DB연결 설정에 대한 정보를 mybatis-config.xml에서 작성-> -->
+</configuration>
